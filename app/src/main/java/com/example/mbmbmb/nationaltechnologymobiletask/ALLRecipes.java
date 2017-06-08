@@ -77,10 +77,10 @@ public class ALLRecipes extends AppCompatActivity implements  TextWatcher,Postio
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
+
         if (checkInternetConenction())
             APIOven(0);
         else
@@ -192,21 +192,30 @@ public class ALLRecipes extends AppCompatActivity implements  TextWatcher,Postio
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        final String query = s.toString().toLowerCase().trim();
-        final ArrayList<Recipes> newlist = new ArrayList<>();
-        for (int i = 0; i < recipesll.size(); i++) {
-            final String text = recipesll.get(i).getTitle().toLowerCase();
-            if (text.contains(query)) {
-                newlist.add(recipesll.get(i));
-            }
-        }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recipesll = newlist;
-        relistadpter = new Recipelist(getApplicationContext(), recipesll, this);
-        recyclerView.setAdapter(relistadpter);
 
-    }
+        public void onTextChanged (CharSequence s,int start, int before, int count){
+            final String query = s.toString().toLowerCase().trim();
+            final ArrayList<Recipes> newlist = new ArrayList<>();
+if(s.length()<1)
+{
+
+}
+        if(s.length()>1)
+        {
+            for (int i = 0; i < recipesll.size(); i++) {
+                final String text = recipesll.get(i).getTitle().toLowerCase();
+                if (text.contains(query)) {
+                    newlist.add(recipesll.get(i));
+                }
+            }
+
+        }
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            recipesll = newlist;
+            relistadpter = new Recipelist(getApplicationContext(), recipesll, this);
+            recyclerView.setAdapter(relistadpter);
+
+        }
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -216,7 +225,6 @@ public class ALLRecipes extends AppCompatActivity implements  TextWatcher,Postio
     @Override
     public void onStart() {
         super.onStart();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
@@ -252,5 +260,6 @@ public class ALLRecipes extends AppCompatActivity implements  TextWatcher,Postio
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
 }
 
