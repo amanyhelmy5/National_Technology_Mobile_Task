@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Ingredient_name"
+    android:layout_width="68sp"
+    android:layout_height="68sp"
+    android:layout_margin="2sp"
+    android:gravity="center"
+    android:textColor="#ffffff"
+    android:background="#a1887f"
+    android:textStyle="bold"
+    android:textSize="10sp" />
+
